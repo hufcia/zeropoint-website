@@ -1,306 +1,390 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>零点引擎信息技术公司 | 探索无界</title>
-    <style>
-        /* --- 基础全局样式 --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f9; 
-            color: #333333;
-            line-height: 1.6;
-        }
-        a { text-decoration: none; color: inherit; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>零点引擎 | 衡枢回路编译所 · 同人二创</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* --- 顶部导航栏 --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: rgba(255, 255, 255, 0.9);
-            position: sticky;
-            top: 0;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e2e8f0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #1a365d;
-        }
-        .nav-logo img { height: 40px; margin-right: 15px; }
-        .nav-links a {
-            margin-left: 30px;
-            color: #64748b;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-        .nav-links a:hover { color: #2563eb; }
+  :root {
+    --bg-deep: #070b12;
+    --bg-panel: #0d141f;
+    --line: #1b2a3d;
+    --cyan: #4de1ff;
+    --cyan-dim: #2a7f96;
+    --amber: #ffb347;
+    --ember: #d4553a;
+    --text: #c9d6e4;
+    --text-dim: #6b7f94;
+  }
 
-        /* --- 主视觉区 --- */
-        .hero {
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            padding: 0 20px;
-        }
-        .hero h1 {
-            font-size: 48px;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            color: #1e3a8a; 
-        }
-        .hero p {
-            font-size: 18px;
-            color: #475569;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-        .btn {
-            padding: 14px 40px;
-            background-color: #2563eb;
-            color: #fff;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        }
-        .btn:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-        }
+  body {
+    background-color: var(--bg-deep);
+    background-image:
+      linear-gradient(rgba(77, 225, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(77, 225, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    color: var(--text);
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
 
-        /* --- 公用区块样式 --- */
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 50px;
-            color: #1e293b;
-            letter-spacing: 2px;
-        }
-        .section-title span { color: #2563eb; }
-        .section-container {
-            padding: 80px 10%;
-            background-color: #ffffff;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
+  /* ===== 导航栏 ===== */
+  .navbar {
+    position: sticky; top: 0; z-index: 99;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 40px;
+    background: rgba(7, 11, 18, 0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand-logo { width: 44px; height: 44px; flex-shrink: 0; }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+  .brand-text .cn { font-size: 16px; font-weight: 700; letter-spacing: 2px; color: #eaf6ff; }
+  .brand-text .en { font-size: 10px; letter-spacing: 2px; color: var(--cyan-dim); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 30px; list-style: none; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none; font-size: 14px;
+    letter-spacing: 1px; padding-bottom: 4px;
+    border-bottom: 1px solid transparent; transition: all 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--cyan); border-bottom-color: var(--cyan); }
+  .nav-btn {
+    padding: 8px 20px; font-size: 13px; color: var(--cyan);
+    background: transparent; border: 1px solid var(--cyan-dim);
+    border-radius: 4px; cursor: pointer; letter-spacing: 1px; transition: all 0.25s ease;
+  }
+  .nav-btn:hover { background: rgba(77,225,255,0.1); border-color: var(--cyan); box-shadow: 0 0 16px rgba(77,225,255,0.35); }
 
-        /* --- 卡片样式 --- */
-        .card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: #bfdbfe;
-        }
-        .card h3 { color: #1e293b; margin-bottom: 15px; font-size: 20px; }
-        .card .role { color: #2563eb; font-size: 14px; margin-bottom: 15px; font-weight: bold; }
-        .card p { color: #64748b; font-size: 15px; }
+  /* ===== Hero ===== */
+  .hero { position: relative; padding: 120px 40px 100px; text-align: center; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; top: -160px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(77,225,255,0.16), transparent 65%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    position: relative; display: inline-block; padding: 5px 16px; margin-bottom: 28px;
+    font-size: 12px; letter-spacing: 3px; color: var(--amber);
+    border: 1px solid rgba(255,179,71,0.35); border-radius: 999px;
+  }
+  .hero h1 {
+    position: relative; font-size: 54px; line-height: 1.3;
+    letter-spacing: 4px; color: #f2f9ff; margin-bottom: 22px;
+  }
+  .hero h1 span { color: var(--cyan); text-shadow: 0 0 28px rgba(77,225,255,0.55); }
+  .hero p { position: relative; max-width: 660px; margin: 0 auto 44px; font-size: 15px; color: var(--text-dim); }
+  .hero-actions { position: relative; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 13px 36px; font-size: 15px; font-weight: 600; letter-spacing: 2px;
+    color: #04121a; background: var(--cyan); border: none; border-radius: 4px;
+    cursor: pointer; transition: all 0.25s ease;
+  }
+  .btn-primary:hover { box-shadow: 0 0 28px rgba(77,225,255,0.6); transform: translateY(-2px); }
+  .btn-ghost {
+    padding: 13px 36px; font-size: 15px; letter-spacing: 2px; color: var(--text);
+    background: transparent; border: 1px solid var(--line); border-radius: 4px;
+    cursor: pointer; transition: all 0.25s ease;
+  }
+  .btn-ghost:hover { border-color: var(--cyan-dim); color: var(--cyan); }
 
-        /* --- 页脚与免责声明 --- */
-        footer {
-            padding: 40px 20px 20px;
-            background-color: #f8fafc;
-            text-align: center;
-            border-top: 1px solid #e2e8f0;
-        }
-        .disclaimer-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #2563eb;
-            border-radius: 6px;
-            padding: 25px;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            text-align: left;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-        }
-        .disclaimer-box h4 {
-            color: #1e293b;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        .disclaimer-box p {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 8px;
-            line-height: 1.8;
-        }
-        .copyright {
-            color: #94a3b8;
-            font-size: 13px;
-        }
-                /* --- 手机端适配 (Media Queries) --- */
-        @media (max-width: 768px) {
-            /* 导航栏适配：改为上下排列 */
-            header {
-                flex-direction: column;
-                padding: 15px 20px;
-            }
-            .nav-logo {
-                margin-bottom: 15px;
-                font-size: 18px;
-            }
-            .nav-logo img {
-                height: 35px;
-            }
-            .nav-links a {
-                margin: 0 10px;
-                font-size: 14px;
-            }
-            
-            /* 主视觉区适配：字体缩小，高度自适应 */
-            .hero {
-                height: auto;
-                padding: 60px 20px;
-            }
-            .hero h1 {
-                font-size: 32px;
-                letter-spacing: 2px;
-            }
-            .hero p {
-                font-size: 15px;
-            }
-            .btn {
-                padding: 12px 30px;
-                font-size: 15px;
-            }
-            
-            /* 内容区块适配：减小内边距，卡片改为单列 */
-            .section-container {
-                padding: 40px 20px;
-            }
-            .section-title {
-                font-size: 24px;
-                margin-bottom: 30px;
-            }
-            .grid-container {
-                grid-template-columns: 1fr; /* 手机上强制单列显示 */
-                gap: 20px;
-            }
-            .card {
-                padding: 20px;
-            }
-            
-            /* 免责声明适配：缩小字号 */
-            .disclaimer-box {
-                padding: 15px;
-                margin-bottom: 20px;
-            }
-            .disclaimer-box p {
-                font-size: 12px;
-            }
-        }
-    </style>
-    
+  /* ===== 通用区块 ===== */
+  .section { max-width: 1140px; margin: 0 auto; padding: 90px 40px; }
+  .section-head { margin-bottom: 48px; }
+  .section-head .index { display: block; font-size: 12px; letter-spacing: 4px; color: var(--cyan-dim); margin-bottom: 12px; }
+  .section-head h2 { font-size: 32px; letter-spacing: 3px; color: #eaf6ff; }
+  .section-head .bar { width: 56px; height: 2px; margin-top: 18px; background: linear-gradient(90deg, var(--cyan), transparent); }
+
+  /* ===== 公司介绍 ===== */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
+  .about-grid p { font-size: 15px; color: var(--text-dim); margin-bottom: 18px; }
+  .about-grid p strong { color: var(--text); font-weight: 600; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-card {
+    padding: 24px 20px; background: var(--bg-panel);
+    border: 1px solid var(--line); border-radius: 6px;
+    text-align: center; transition: all 0.25s ease;
+  }
+  .stat-card:hover { border-color: var(--cyan-dim); box-shadow: 0 0 20px rgba(77,225,255,0.12); }
+  .stat-card .num { display: block; font-size: 26px; font-weight: 700; color: var(--cyan); letter-spacing: 1px; }
+  .stat-card .label { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; }
+
+  /* ===== 大炎纪事 ===== */
+  .chronicle {
+    background: linear-gradient(180deg, rgba(13,20,31,0.9), rgba(7,11,18,0.9));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .chronicle-intro {
+    max-width: 820px; margin-bottom: 56px;
+    font-size: 15px; color: var(--text-dim);
+  }
+  .chronicle-intro p { margin-bottom: 18px; }
+  .chronicle-intro em { color: var(--amber); font-style: normal; }
+
+  .timeline { position: relative; padding-left: 34px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px;
+    width: 1px; background: linear-gradient(180deg, var(--cyan-dim), transparent);
+  }
+  .tl-item { position: relative; padding-bottom: 40px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -30px; top: 8px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg-deep); border: 2px solid var(--cyan);
+    box-shadow: 0 0 10px rgba(77,225,255,0.6);
+  }
+  .tl-item .year {
+    display: inline-block; font-size: 12px; letter-spacing: 2px;
+    color: var(--amber); margin-bottom: 6px;
+  }
+  .tl-item h3 { font-size: 18px; letter-spacing: 1px; color: #eaf6ff; margin-bottom: 10px; }
+  .tl-item p { font-size: 14px; color: var(--text-dim); max-width: 820px; }
+
+  .quote-box {
+    margin-top: 56px; padding: 28px 32px;
+    background: var(--bg-panel); border-left: 3px solid var(--ember);
+    border-radius: 0 6px 6px 0;
+  }
+  .quote-box p { font-size: 16px; color: #eaf6ff; letter-spacing: 1px; }
+  .quote-box span { display: block; margin-top: 10px; font-size: 12px; color: var(--text-dim); letter-spacing: 1px; }
+
+  /* ===== 业务板块 ===== */
+  .biz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+  .biz-card {
+    position: relative; padding: 32px 26px; background: var(--bg-panel);
+    border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .biz-card::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    transition: width 0.4s ease;
+  }
+  .biz-card:hover { transform: translateY(-6px); border-color: var(--cyan-dim); box-shadow: 0 12px 32px rgba(0,0,0,0.5); }
+  .biz-card:hover::before { width: 100%; }
+  .biz-card .no { font-size: 12px; letter-spacing: 3px; color: var(--cyan-dim); }
+  .biz-card h3 { margin: 14px 0 12px; font-size: 18px; letter-spacing: 2px; color: #eaf6ff; }
+  .biz-card p { font-size: 14px; color: var(--text-dim); }
+
+  /* ===== 页脚 ===== */
+  .footer { border-top: 1px solid var(--line); padding: 40px; text-align: center; background: #050810; }
+  .footer .brand-mini {
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px;
+    font-size: 13px; letter-spacing: 2px; color: var(--text-dim);
+  }
+  .footer .disclaimer { max-width: 760px; margin: 0 auto; font-size: 12px; line-height: 1.9; color: #4a5a6b; }
+  .footer .copy { margin-top: 18px; font-size: 12px; color: #37485a; }
+
+  @media (max-width: 860px) {
+    .navbar { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 80px 20px 70px; }
+    .hero h1 { font-size: 34px; letter-spacing: 2px; }
+    .section { padding: 60px 20px; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .section-head h2 { font-size: 24px; }
+    .timeline { padding-left: 26px; }
+  }
+</style>
 </head>
 <body>
 
-    <!-- 顶部导航栏 -->
-    <header>
-        <div class="nav-logo">
-            <img src="picture/logo.svg" alt="零点引擎Logo">
-                零点引擎
-        </div>
-        <nav class="nav-links">
-            <a href="#">首页</a>
-            <a href="#departments">业务板块</a>
-            <a href="#team">核心团队</a>
-            <a href="#">联系我们</a>
-        </nav>
-    </header>
+  <!-- ========== 导航栏 ========== -->
+  <header class="navbar">
+    <a href="#" class="brand">
+      <svg class="brand-logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="octEdge" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4de1ff"/>
+            <stop offset="100%" stop-color="#1b6f8c"/>
+          </linearGradient>
+          <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="45%" stop-color="#4de1ff" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#4de1ff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <polygon points="57.86,42.72 42.72,57.87 21.28,57.87 6.14,42.72 6.14,21.28 21.28,6.13 42.72,6.13 57.86,21.28"
+                 fill="none" stroke="url(#octEdge)" stroke-width="2" stroke-linejoin="round"/>
+        <g stroke="#2a7f96" stroke-width="1.2" fill="none" stroke-linecap="round">
+          <path d="M32 32 L32 18 L24 10"/>
+          <path d="M32 32 L46 20 L46 12"/>
+          <path d="M32 32 L18 32 L10 24"/>
+          <path d="M32 32 L18 46 L18 54"/>
+          <path d="M32 32 L44 44 L52 44"/>
+        </g>
+        <g fill="#4de1ff">
+          <circle cx="24" cy="10" r="1.8"/><circle cx="46" cy="12" r="1.8"/>
+          <circle cx="10" cy="24" r="1.8"/><circle cx="18" cy="54" r="1.8"/>
+          <circle cx="52" cy="44" r="1.8"/>
+        </g>
+        <g stroke="#ffb347" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+          <path d="M21 27 L16 32 L21 37"/>
+          <path d="M43 27 L48 32 L43 37"/>
+        </g>
+        <circle cx="32" cy="32" r="11" fill="url(#coreGlow)" opacity="0.55"/>
+        <circle cx="32" cy="32" r="6" fill="none" stroke="#4de1ff" stroke-width="1.4"/>
+        <circle cx="32" cy="32" r="2.2" fill="#eaf9ff"/>
+        <g stroke="#4de1ff" stroke-width="1.2" stroke-linecap="round">
+          <path d="M32 22 L32 26"/><path d="M32 38 L32 42"/>
+          <path d="M22 32 L26 32"/><path d="M38 32 L42 32"/>
+        </g>
+      </svg>
+      <div class="brand-text">
+        <span class="cn">零点引擎</span>
+        <span class="en">Zero Point Engine</span>
+      </div>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home">首页</a></li>
+        <li><a href="#about">关于我们</a></li>
+        <li><a href="#chronicle">大炎纪事</a></li>
+        <li><a href="#business">业务板块</a></li>
+      </ul>
+    </nav>
+    <button class="nav-btn">接入衡枢节点</button>
+  </header>
 
-    <!-- 主内容区域 -->
-    <main>
-        <!-- 主视觉区 -->
-        <section class="hero">
-            <h1>零点驱动 · 探索无界</h1>
-            <p>零点引擎信息技术公司（Zero Point Engine），致力于为泰拉大陆提供最可靠的全息交互终端与前沿源石回路技术解决方案。</p>
-            <button class="btn" onclick="alert('博士，实习生于江晚正在摸鱼，暂时无法响应...')">在线咨询</button>
-        </section>
+  <!-- ========== Hero ========== -->
+  <section class="hero" id="home">
+    <span class="hero-tag">HENGSHU NODE ONLINE / 衡枢节点已接入</span>
+    <h1>从<span>零点</span>开始<br>为移动城市打补丁</h1>
+    <p>零点引擎 · 衡枢回路编译所。我们不做台前的东西，只负责让大炎移动城市的底层回路，在夜里安稳地熄灯。</p>
+    <div class="hero-actions">
+      <button class="btn-primary">查看编译链路</button>
+      <button class="btn-ghost">调阅城志</button>
+    </div>
+  </section>
 
-        <!-- 业务板块 -->
-        <section id="departments" class="section-container">
-            <h2 class="section-title">核心<span>业务</span></h2>
-            <div class="grid-container">
-                <article class="card">
-                    <h3>源石信息架构</h3>
-                    <p>研发新一代源石回路编译技术，为各类移动城邦提供高速、稳定的底层数据通信网络。</p>
-                </article>
-                <article class="card">
-                    <h3>全息交互系统</h3>
-                    <p>提供定制化的战术可视化终端与用户交互界面，让战场信息一目了然。</p>
-                </article>
-                <article class="card">
-                    <h3>航空航天制造</h3>
-                    <p>承建各类空地载具的电子航电系统，确保每一次起飞与降落的安全可靠。</p>
-                </article>
-            </div>
-        </section>
+  <!-- ========== 关于我们 ========== -->
+  <section class="section" id="about">
+    <div class="section-head">
+      <span class="index">01 / ABOUT</span>
+      <h2>关于零点引擎</h2>
+      <div class="bar"></div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p><strong>零点引擎</strong>，前身为大炎东部移动城市“衡枢”天师府外门的衡枢回路编译组。我们处理的是城市最底层的东西：源石回路的编译顺序、术式推演的轻量核心、边缘终端的信息通路。</p>
+        <p>我们不站在台前，也不属于天师府任何一派。衡枢城里的人大多没听过我们的名字，但他们夜里能安稳熄灯，靠的往往是零点引擎那套没人看得懂的编译链路。</p>
+        <p>我们的信条只有一句：<em>世界的底层不需要被看见，只需要不崩。</em></p>
+      </div>
+      <div class="stats">
+        <div class="stat-card"><span class="num">12+</span><span class="label">登记在册的源石回路方案</span></div>
+        <div class="stat-card"><span class="num">99.99%</span><span class="label">回路链路稳定率</span></div>
+        <div class="stat-card"><span class="num">48ms</span><span class="label">术式回路响应延迟</span></div>
+        <div class="stat-card"><span class="num">子夜</span><span class="label">编译值守时段</span></div>
+      </div>
+    </div>
+  </section>
 
-        <!-- 核心团队 -->
-        <section id="team" class="section-container" style="background-color: #f4f7f9;">
-            <h2 class="section-title">核心<span>团队</span></h2>
-            <div class="grid-container">
-                <article class="card">
-                    <h3>林晚柚</h3>
-                    <div class="role">CEO / 兼 罗德岛干员</div>
-                    <p>穹宇的掌舵人，以极为温和却坚定的方式管理公司，似乎总能看穿员工的疲惫。</p>
-                </article>
-                <article class="card">
-                    <h3>江晚 (暮川)</h3>
-                    <div class="role">源石信息部 · 实习编译员</div>
-                    <p>负责前端信息节点维护。拖延症晚期，但在死线前会爆发出惊人的专注力，平时喜欢缩在卫衣里摸鱼。</p>
-                </article>
-                <article class="card">
-                    <h3>Echo (回响)</h3>
-                    <div class="role">技术部 · 术师</div>
-                    <p>哥伦比亚出身的干员，使用数据之弓进行远程轰击，是江晚常常熬夜互发“我写不动了”的代码搭子。</p>
-                </article>
-            </div>
-        </section>
-    </main>
+  <!-- ========== 大炎纪事 ========== -->
+  <section class="section chronicle" id="chronicle">
+    <div class="section-head">
+      <span class="index">02 / CHRONICLE</span>
+      <h2>大炎纪事</h2>
+      <div class="bar"></div>
+    </div>
 
-    <!-- 页脚与免责声明 -->
-    <footer>
-        <div class="disclaimer-box">
-            <h4>&#9888;&#65039; 免责声明 (Disclaimer)</h4>
-            <p>1. 本网页为个人学习 HTML5 与 CSS 的练习作品，非商业用途，不涉及任何盈利用途。</p>
-            <p>2. “零点引擎信息技术公司”及网页内提及的“泰拉大陆”、“罗德岛”等设定，均属于游戏《明日方舟》的同人虚构创作，与现实中的任何企业、团体或真实事件无关。</p>
-            <p>3. 网页 Logo 与文字内容为个人原创绘制与编写，如有雷同，纯属巧合。</p>
-            <p>4. 由于作者是一名刚学基础的代码小白（且拖延症严重），网页可能存在诸多Bug，若显示异常，还请见谅喵。</p>
-        </div>
-        <div class="copyright">
-            <!-- 删除了“股份有限公司”，改成了“同人企划” -->
-            &copy; 2026 零点引擎信息技术公司同人企划. All Rights Reserved.
-        </div>
-    </footer>
-    
+    <div class="chronicle-intro">
+      <p>衡枢城是大炎东部一座不算起眼的移动城市。它没有最华丽的天师塔，也没有最繁忙的商港，但它有一件事做得很好——<em>夜里很少出事</em>。</p>
+      <p>这件事背后，藏着一支从没被写进城门志的编译组。以下是衡枢城地方志里被删掉的那几页。</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="year">泰拉历 1086 年</span>
+        <h3>衡枢回路编译组成立</h3>
+        <p>天师府外门设“衡枢回路编译组”，名义上是协助内院整理术式档案，实际工作是把天师们写下的源石术式，拆解翻译成可复用的源石回路。成员多为考不进内院、又不愿回乡的年轻编译员，编制挂在外门最末一栏。</p>
+      </div>
+      <div class="tl-item">
+        <span class="year">泰拉历 1089 年</span>
+        <h3>第一次“子夜编译”</h3>
+        <p>衡枢城西区一段老旧回路在夜间频繁失序，内院给出的方案是整段更换，预算被驳回了三次。编译组提出先重写编译顺序试一次。那一夜，五个人守到天亮，把回路一寸一寸重新排过。第二天西区没有熄屏。此后，“子夜编译”成了组里的固定值守。</p>
+      </div>
+      <div class="tl-item">
+        <span class="year">泰拉历 1092 年</span>
+        <h3>熄屏事故与“零点”</h3>
+        <p>城市底层一段源石回路在夜里突然失序，整片城区的终端同时熄屏。内院天师仍主张更换整段回路，代价极高。一名实习生提出另一种思路：不改硬件，只重写回路的编译顺序，让信号绕开失序节点。</p>
+        <p>方案跑通的那天凌晨，有人问这套东西该叫什么。提方案的人说：所有回路在启动之前，刻度都是归零的，那就叫<em>“零点”</em>吧。</p>
+      </div>
+      <div class="tl-item">
+        <span class="year">泰拉历 1094 年</span>
+        <h3>从编译组到零点引擎</h3>
+        <p>“零点”方案在衡枢城多个城区复用成功，编译组从外门独立出来，挂牌“零点引擎”。独立那天没有剪彩，只有一块手写的木牌，和一群人连续熬了三个通宵后凑出来的一锅汤。</p>
+      </div>
+      <div class="tl-item">
+        <span class="year">泰拉历 1098 年</span>
+        <h3>边缘节点铺开</h3>
+        <p>零点引擎把编译链路从衡枢城核心区，一路铺到移动城市的边缘节点。移动城市在行驶中会不断改变回路负载，边缘节点最容易被忽略、也最容易先崩。零点引擎的做法是：先把边缘稳住，再谈核心。</p>
+      </div>
+      <div class="tl-item">
+        <span class="year">泰拉历 1101 年</span>
+        <h3>如今的零点引擎</h3>
+        <p>公司仍设在衡枢城旧编译所的原址，没有搬进天师塔。同行对它的评价依旧分裂：有人说它是天师府外包出来的野路子，也有人承认，很多移动城市夜里能安稳熄灯，靠的就是它那套没人看得懂的编译链路。</p>
+        <p>零点引擎不解释。它只是继续在子夜守着编译队列，等下一段回路归零。</p>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <p>“世界的底层不需要被看见，只需要不崩。”</p>
+      <span>—— 零点引擎 · 衡枢旧编译所墙上的手写标语</span>
+    </div>
+  </section>
+
+  <!-- ========== 业务板块 ========== -->
+  <section class="section" id="business">
+    <div class="section-head">
+      <span class="index">03 / BUSINESS</span>
+      <h2>业务板块</h2>
+      <div class="bar"></div>
+    </div>
+    <div class="biz-grid">
+      <div class="biz-card">
+        <span class="no">MODULE 01</span>
+        <h3>源石回路编译器</h3>
+        <p>把天师术式翻译成可复用、可维护的源石回路，追求编译顺序上的最短路径与最低失序率。</p>
+      </div>
+      <div class="biz-card">
+        <span class="no">MODULE 02</span>
+        <h3>术式推演核心</h3>
+        <p>轻量化推演核心，在有限源石算力下稳定运行术式模拟，为城市调度提供可预期的推演结果。</p>
+      </div>
+      <div class="biz-card">
+        <span class="no">MODULE 03</span>
+        <h3>移动城市边缘终端</h3>
+        <p>面向移动城市边缘节点的终端集成，处理行驶中不断变化的回路负载，优先保证边缘不先崩。</p>
+      </div>
+      <div class="biz-card">
+        <span class="no">MODULE 04</span>
+        <h3>信息编译与分发</h3>
+        <p>异构信息流的实时编译与分发，为衡枢城各城区与边缘节点提供低延迟的信息通路。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 页脚 ========== -->
+  <footer class="footer">
+    <div class="brand-mini">
+      <svg width="20" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="57.86,42.72 42.72,57.87 21.28,57.87 6.14,42.72 6.14,21.28 21.28,6.13 42.72,6.13 57.86,21.28"
+                 fill="none" stroke="#2a7f96" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="32" cy="32" r="6" fill="none" stroke="#4de1ff" stroke-width="3"/>
+      </svg>
+      零点引擎 · 衡枢回路编译所
+    </div>
+    <p class="disclaimer">
+      免责声明：本页面为《明日方舟》同人二创虚构练习作品。其中“零点引擎”“衡枢城”“衡枢回路编译组”及相关人物、事件、时间线、业务内容与数据均为同人虚构设定，仅用于个人前端学习与代码练习，与官方世界观设定存在出入，亦与任何现实中的企业、机构或组织无关。
+    </p>
+    <p class="copy">© 2024 Zero Point Engine · 同人二创练习项目</p>
+  </footer>
+
 </body>
 </html>
