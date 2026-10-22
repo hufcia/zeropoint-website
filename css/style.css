@@ -194,23 +194,28 @@ dialog::backdrop {
 
 /* 弹窗主体样式 */
 dialog {
-  /* 核心：强制脱离文档流，居中悬浮 */
-  position: fixed; 
+  /* 核心：强制脱离文档流，完美居中 */
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* 完美的绝对居中魔法 */
-  z-index: 9999; /* 确保弹窗比网页任何内容都高 */
+  transform: translate(-50%, -50%);
+  z-index: 9999;
   
-  /* 你的赛博外观 */
+  /* 弹窗自身的外观 */
   padding: 32px;
   border: 1px solid var(--cyan);
   border-radius: 8px;
   background-color: var(--bg-panel);
   color: var(--text);
   width: 90%;
-  max-width: 500px; /* 防止在手机上撑破屏幕 */
-  box-shadow: 0 0 40px rgba(77, 225, 255, 0.2);
+  max-width: 500px;
+  
+  /* 💡 魔法在这里：用 100vmax 的阴影直接铺满全屏，替代出错的 backdrop！ */
+  box-shadow: 0 0 0 100vmax rgba(7, 11, 18, 0.85), 
+              0 0 40px rgba(77, 225, 255, 0.2); 
 }
+
+/* 把之前的 dialog::backdrop 删掉或者注释掉，因为咱们不用它了 */
 
 /* 弹窗里的标题 */
 .dialog-content h2 {
@@ -235,4 +240,5 @@ dialog {
 .dialog-content form {
   margin-top: 24px;
   text-align: right;
+  box-shadow: 0 0 0 100vmax rgba(7, 11, 18, 0.85); /* 加上这一句！ */
 }
