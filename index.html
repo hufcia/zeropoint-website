@@ -8,7 +8,18 @@
 
 </head>
 <body>
-
+<dialog id="welcome-dialog" open>
+  <div class="dialog-content">
+    <h2>⚠️ 同人二创声明</h2>
+    <p>欢迎来到“零点引擎”。</p>
+    <p>本网页为个人学习前端技术（HTML/CSS）的练习作品，内容属于《明日方舟》同人虚构创作，<strong>与现实中的任何同名企业、团体绝无关联</strong>。</p>
+    <p>请放心浏览喵~</p>
+    <!-- 这个 form 是 HTML 隐藏的魔法，点按钮就能关掉弹窗，不用写JS -->
+    <form method="dialog">
+      <button class="btn-primary">我知道了，进入网页</button>
+    </form>
+  </div>
+</dialog>
   <header class="navbar">
     <a href="#" class="brand">
       <svg class="brand-logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
