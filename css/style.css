@@ -185,21 +185,30 @@ body {
   .section-head h2 { font-size: 24px; }
   .timeline { padding-left: 26px; }
 }
-/* 原生弹窗背景遮罩（默认是黑色的） */
+/* 原生弹窗背景遮罩（让背景变黑变模糊） */
 dialog::backdrop {
   background: rgba(7, 11, 18, 0.85);
   backdrop-filter: blur(4px);
+  z-index: 9998; /* 确保遮罩在最上面 */
 }
 
 /* 弹窗主体样式 */
 dialog {
-  margin: auto;
+  /* 核心：强制脱离文档流，居中悬浮 */
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 完美的绝对居中魔法 */
+  z-index: 9999; /* 确保弹窗比网页任何内容都高 */
+  
+  /* 你的赛博外观 */
   padding: 32px;
   border: 1px solid var(--cyan);
   border-radius: 8px;
   background-color: var(--bg-panel);
   color: var(--text);
-  max-width: 500px;
+  width: 90%;
+  max-width: 500px; /* 防止在手机上撑破屏幕 */
   box-shadow: 0 0 40px rgba(77, 225, 255, 0.2);
 }
 
@@ -208,6 +217,7 @@ dialog {
   color: var(--amber);
   margin-bottom: 16px;
   letter-spacing: 2px;
+  font-size: 20px;
 }
 
 /* 弹窗里的段落 */
